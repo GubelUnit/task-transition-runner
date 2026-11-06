@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "task-transition-runner"
+version = "0.1.0"
+description = ""
+authors = []
+packages = [{include = "task_transition_runner", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+pyyaml = "^6.0.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+pytest-cov = "^5.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+branch = true
+source = ["task_transition_runner"]
+
+[tool.coverage.report]
+fail_under = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "external_witness: expliziter Witness-Producer ausserhalb der hermetischen Default-Suite",
+]
+addopts = [
+    "-m",
+    "not external_witness",
+]

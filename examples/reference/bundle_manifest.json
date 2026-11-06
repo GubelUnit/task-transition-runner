@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "kind": "REFERENCE_BUNDLE_MANIFEST",
+  "entries": [
+    {
+      "source": "examples/reference/runner.yaml",
+      "destination_root": "input",
+      "destination": "runner.yaml",
+      "sha256": "f64132db3a4ea577cee1ec38dec65e3e08adb0e5b7e7bd5237f3a170d21aff5c",
+      "byte_length": 369
+    },
+    {
+      "source": "examples/reference/tasks.yaml",
+      "destination_root": "input",
+      "destination": "tasks.yaml",
+      "sha256": "3f6ba538a175a3e89f0c3c35ad537c6589a8ba0e15c22facbd542d82408f4842",
+      "byte_length": 380
+    },
+    {
+      "source": "examples/reference/task_sources/task_b.yaml",
+      "destination_root": "input",
+      "destination": "task_sources/task_b.yaml",
+      "sha256": "4ca5f0132691f495b0f17d6150b92a12e34bd4ed6513d9ba23bedf8eea0e01ed",
+      "byte_length": 510
+    },
+    {
+      "source": "examples/reference/task_sources/terminal_rest.yaml",
+      "destination_root": "input",
+      "destination": "task_sources/terminal_rest.yaml",
+      "sha256": "f7e20b85957633213f3514b7f9f817b930f70d6541a87cb6ea2b336d1d0322e8",
+      "byte_length": 40
+    },
+    {
+      "source": "examples/reference/task_specs/task_a.md",
+      "destination_root": "input",
+      "destination": "task_specs/task_a.md",
+      "sha256": "949d84633b8557f1e577562bf1ff8d9a5864b99927bd209dea284658e7e08939",
+      "byte_length": 494
+    },
+    {
+      "source": "examples/reference/task_specs/task_b.md",
+      "destination_root": "input",
+      "destination": "task_specs/task_b.md",
+      "sha256": "a6dd2f777cf92a43afff1f7aff669ec1372b075cf3d9708c46e5623f36954146",
+      "byte_length": 1079
+    },
+    {
+      "source": "prompts/developer.md",
+      "destination_root": "input",
+      "destination": "prompts/developer.md",
+      "sha256": "a887e94ee98869e4d2b669fa6939e5edd28ea85f436722ad88e29c34a13e297a",
+      "byte_length": 886
+    },
+    {
+      "source": "prompts/orchestrator.md",
+      "destination_root": "input",
+      "destination": "prompts/orchestrator.md",
+      "sha256": "5fcc1ac7bad9ff6086faa1c123af5f37e21648a1856c537708b4d7243dc03fc9",
+      "byte_length": 956
+    },
+    {
+      "source": "prompts/validator.md",
+      "destination_root": "input",
+      "destination": "prompts/validator.md",
+      "sha256": "2ad84bde1412d27eb24415f1ee061122e200abee0eaf1b678a511d6b80db53cb",
+      "byte_length": 804
+    },
+    {
+      "source": "examples/fixture/pyproject.toml",
+      "destination_root": "seed",
+      "destination": "pyproject.toml",
+      "sha256": "0cb50b904dfd608556037c58a6569671a78cb47dcc594a61b7a844b51b024ca7",
+      "byte_length": 261
+    },
+    {
+      "source": "examples/fixture/src/reference_app/__init__.py",
+      "destination_root": "seed",
+      "destination": "src/reference_app/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "byte_length": 0
+    },
+    {
+      "source": "examples/fixture/tests/test_environment.py",
+      "destination_root": "seed",
+      "destination": "tests/test_environment.py",
+      "sha256": "dce6ad8b15b3cb17bdc4fe48223e740937f854c5337d64fdaa591abbd8c6d4a5",
+      "byte_length": 93
+    },
+    {
+      "source": "examples/fixture/tests/test_labels.py",
+      "destination_root": "seed",
+      "destination": "tests/test_labels.py",
+      "sha256": "e92cccb2cc633d901fb2b638da530d155dc29bf785f633ee32e06976e3b369cf",
+      "byte_length": 107
+    },
+    {
+      "source": "examples/fixture/tests/test_summary.py",
+      "destination_root": "seed",
+      "destination": "tests/test_summary.py",
+      "sha256": "7a5a5c43b058c3f4b505fcb67afb23b376568ea561b3ff62d088c43a7f01717b",
+      "byte_length": 174
+    }
+  ]
+}

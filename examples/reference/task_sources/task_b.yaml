@@ -1,0 +1,19 @@
+schema_version: '1.0'
+active_task:
+  task_id: reference-task-b
+  spec_ref: task_specs/task_b.md
+  allowed_paths:
+  - src/reference_app/summary.py
+  validation:
+    commands:
+    - id: task_a_contract
+      command: python -m pytest -q -p no:cacheprovider tests/test_labels.py
+      timeout_seconds: 30
+    - id: task_b_contract
+      command: python -m pytest -q -p no:cacheprovider tests/test_summary.py
+      timeout_seconds: 30
+  expected_outcome:
+    kind: GREEN
+  adapter:
+    kind: cursor
+  metadata: {}

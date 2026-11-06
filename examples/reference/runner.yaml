@@ -1,0 +1,17 @@
+schema_version: '1.0'
+target:
+  repo_root: target
+  main_branch: main
+runtime_root: runtime
+task_source: tasks.yaml
+baseline_validation:
+  command: 'true'
+  timeout_seconds: 30
+adapter:
+  kind: cursor
+  executable: cursor-agent
+  timeout_seconds: 1800
+prompts:
+  developer: prompts/developer.md
+  orchestrator: prompts/orchestrator.md
+  validator: prompts/validator.md

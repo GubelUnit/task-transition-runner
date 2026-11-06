@@ -1,0 +1,211 @@
+schema_version: "1"
+kind: PUBLIC_AGENT_GUIDE
+audience: public_operator
+# The runner does not read this file.
+runner_execution_relevance: NON_EXECUTION_RELEVANT
+semantic_sources:
+  - README.md
+  - INSTALL.md
+  - USAGE.md
+  - REFERENCE_WORKFLOW.md
+  - KNOWN_LIMITS.md
+installation:
+  package_name: task-transition-runner
+  import_package: task_transition_runner
+  python: ">=3.12,<3.13"
+  installer: poetry
+  install_command: poetry install
+  git: external_prerequisite
+  cursor_executable: cursor-agent
+  cursor_login: external_prerequisite
+  unset_before_run:
+    - CURSOR_API_ENDPOINT
+  vendored_python: false
+  vendored_cursor_binary: false
+  console_script: false
+  pypi: false
+invocation:
+  executable: python
+  entrypoint: task_transition_runner.cli.main
+  form: "PYTHONDONTWRITEBYTECODE=1 python -c 'import sys; from task_transition_runner.cli import main; raise SystemExit(main(sys.argv[1:]))' <command> --config <config-path>"
+  poetry_form: "PYTHONDONTWRITEBYTECODE=1 poetry run python -c 'import sys; from task_transition_runner.cli import main; raise SystemExit(main(sys.argv[1:]))' <command> --config <config-path>"
+  public_environment:
+    PYTHONDONTWRITEBYTECODE: "1"
+  public_environment_scope: declared_validation_inherits_the_runner_environment
+  pytest_cache_suppression: "-p no:cacheprovider"
+  pytest_cache_suppression_scope: suppresses_.pytest_cache_only
+  contract_suite_command: 'bash scripts/validate.sh --cov="${PWD}/src/task_transition_runner" --cov-branch --cov-fail-under=100'
+  contract_suite_coverage_source: absolute_checkout_package_source
+  required_flag: "--config"
+  status_optional_flag: "--json"
+  stdout_default: yaml
+  stdout_status_json: json
+  success_exit: 0
+  # Exit 1 with outcome AWAITING_DECISIONS is the expected pause, not a crash.
+  failure_exit: 1
+  awaiting_decisions_exit: 1
+  awaiting_decisions_is_expected_pause: true
+required_inputs:
+  - config_schema_version_1_0
+  - target.repo_root
+  - target.main_branch
+  - runtime_root
+  - task_source
+  - baseline_validation.command
+  - baseline_validation.timeout_seconds
+  - adapter.kind_cursor
+  - adapter.executable
+  - adapter.timeout_seconds
+  - prompt_developer
+  - prompt_orchestrator
+  - prompt_validator
+  - external_git
+  - external_cursor_agent_when_running_the_adapter
+generated_workspaces:
+  - runtime_root
+  - runtime_main_state_yaml
+  - runtime_promotion_consumed_yaml
+  - runtime_runner_source_pin_yaml
+  - runtime_runs
+  - target_git_worktree
+supported_commands:
+  - init
+  - run
+  - status
+authority_boundaries:
+  - worker_success_cannot_authorize_promotion
+  - orchestrator_and_validator_are_external_decision_files
+  - runner_does_not_plan_or_choose_the_next_task
+  - one_active_task_on_one_local_target
+  - target_checkout_cannot_select_the_runner
+  - status_is_read_only
+  - status_source_mismatch_is_noninterpreting
+  - publication_export_and_seal_are_outside_the_runner
+forbidden_actions:
+  - fourth_command
+  - console_script
+  - parallel_tasks
+  - provider_agnostic_execution
+  - universal_recovery
+  - arbitrary_rollback
+  - runner_self_upgrade
+  - runtime_schema_migration
+  - historical_reopen
+  - pypi_distribution_claim
+  - invent_a_successor_at_terminal_rest
+  - builtin_planning
+  - hand_run_validation_between_pending_promotion_and_admission
+  - activate_task_b_before_task_a_is_drained
+  - second_init_on_the_same_runtime
+expected_outputs:
+  - yaml_stdout
+  - json_stdout_only_for_status_with_json_flag
+  - init_INITIALIZED_BOOTSTRAP_OK
+  - run_AWAITING_DECISIONS_PROMOTION_DECISION_MISSING_exit_1
+  - run_PENDING_PROMOTION_PROMOTION_INTENT_PERSISTED
+  - run_DRAINED_AWAITING_TASK_PROMOTION_EFFECT_ADMITTED
+  - run_SETTLED_CONTINUATION_CONSUMED
+  - run_TERMINAL_REST
+  - status_STATUS_VIEW_PROJECTED_or_BLOCKED
+# known_limits are unsupported claim ids. They are boundaries, not capabilities.
+known_limits:
+  - PUBLIC_REPOSITORY_EXPORT
+  - CANDIDATE_SEAL
+  - LICENSE_NOTICE
+  - FOURTH_CLI_COMMAND
+  - UI_BRIDGE
+  - BUILTIN_PLANNING
+  - PACKAGING_PYPI
+  - PROVIDER_AGNOSTICISM
+  - MODEL_OUTPUT_DETERMINISM
+  - DIFF_DETERMINISM
+  - RESULT_SHA_DETERMINISM
+  - PRODUCER_INDEPENDENCE
+  - HISTORICAL_REOPEN
+  - RUNNER_SELF_UPGRADE
+  - RUNTIME_MIGRATION
+  - PARALLEL_TASKS
+  - DISTRIBUTED_COORDINATION
+  - SANDBOX_SAME_UID_ISOLATION
+  - ARBITRARY_ROLLBACK
+  - UNIVERSAL_RECOVERY
+  - EXACTLY_ONCE
+  - TRANSACTIONAL
+failure_handling:
+  - fail_closed
+  - exit_1_when_ok_is_false
+  - AWAITING_DECISIONS_exit_1_is_the_expected_pause
+  - CLI_COMMAND_UNKNOWN
+  - CLI_CONFIG_REQUIRED
+  - CURSOR_API_ENDPOINT_rejects_the_adapter_invocation
+  - no_guess_across_a_missing_decision
+  - no_resume_of_an_incomplete_cursor_worker
+  - do_not_repair_a_failed_reference_root_in_place
+# qualifications limit every supported capability. They are not extra features.
+qualifications:
+  - mechanical_admission_is_not_universal_semantic_correctness
+  - limited_to_the_documented_reference_path_and_contract_proof
+  - expected_red_is_optional
+  - expected_red_matches_an_exact_substring
+  - direct_green_does_not_require_a_prior_expected_red
+  - worker_success_cannot_authorize_promotion
+  - separate_decision_files_do_not_prove_producer_independence
+  - pre_authorization_restart_is_a_second_cli_process_after_a_durable_result_and_before_final_decisions
+  - an_incomplete_cursor_worker_is_not_resumed
+  - post_effect_reconciliation_is_a_second_cli_process_after_a_durable_promotion_and_before_final_bookkeeping
+  - successor_is_a_new_ordinary_task_with_a_fresh_identity
+  - no_historical_reopen
+  - no_universal_recovery
+  - no_runner_self_upgrade
+  - no_runtime_schema_migration
+  - status_on_source_mismatch_is_a_noninterpreting_authority_error
+  - reproducibility_is_the_reference_path_plus_the_contract_suite_exit_0
+  - reproducibility_is_bound_to_the_exact_release_source_snapshot
+  - no_identical_model_outputs
+  - no_identical_diffs
+  - no_identical_result_shas
+  - no_provider_agnosticism
+  - no_arbitrary_replacement_prompts
+  - cursor_is_the_only_evidenced_adapter
+  - ui_bridge_is_outside_the_headless_proof
+  - terminal_rest_writes_no_successor
+  - coverage_is_candidate_scope_evidence_not_product_law
+  - public_cli_is_exactly_init_run_and_status
+  - no_fourth_command
+  - no_parallel_tasks
+  - at_most_one_active_task
+  - local_sequential_one_target_and_one_main_branch
+  - no_pypi
+  - no_distributed_coordination
+  - no_remote_push_or_pull_request_orchestration
+  - no_builtin_sandbox
+  - allowed_paths_is_a_promotion_gate_not_host_protection
+  - no_arbitrary_rollback
+  - no_exactly_once
+  - promotion_is_not_a_transaction
+  - no_builtin_planning
+  - export_seal_and_license_are_not_runner_capabilities
+  - publication_time_is_unbound
+  - python_constraint_is_ge_3_12_lt_3_13
+  - poetry_install_and_external_git
+  - no_vendored_python_and_no_vendored_cursor_binary
+  - no_console_script
+  - cursor_login_is_external
+  - validation_commands_are_not_sandboxed
+  - awaiting_decisions_exits_1_and_is_the_expected_pause
+  - admission_rereads_sealed_validation_and_is_not_a_second_validation_run
+  - task_b_is_activated_only_after_task_a_is_drained
+  - terminal_rest_is_a_later_invocation_and_is_not_required_for_task_b_to_settle
+# capabilities are the supported claim ids.
+capabilities:
+  - TRANSITION_CONTROL_LAYER
+  - DIRECT_GREEN
+  - EXPECTED_RED_CLOSURE
+  - WORKER_NONAUTHORITY
+  - PRE_AUTHORIZATION_RESTART
+  - POST_EFFECT_RECONCILIATION
+  - SUCCESSOR_AFTER_RECOVERY
+  - CODE_AUTHORITY
+  - REFERENCE_REPRODUCIBILITY
+  - CURSOR_ADAPTER
+  - TERMINAL_REST

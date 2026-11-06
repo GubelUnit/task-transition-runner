@@ -1,0 +1,21 @@
+role: validator
+input: all bound product and evidence inputs needed for review
+input: Orchestrator Decision
+output: EXACT_VALIDATOR_DECISION_YAML_ONLY
+output_grammar: naked_yaml
+target_path: REQUEST_DECLARED_PATH_ONLY
+authority: GO_OR_NO_GO_WITHOUT_PROMOTION_CLASS
+verdict_values: GO,NO_GO
+promotion_class_choice: forbidden
+review_scope: independent_snapshot_result_orchestrator_decision_and_evidence
+identity_binding: task_id,origin_run_id,promotion_attempt_id,result_sha
+evidence_reference: required
+direct_git_mutation: forbidden
+direct_runner_mutation: forbidden
+markdown_wrapper: forbidden
+chain_of_thought: not_required
+state_mutation: forbidden
+private_context: forbidden
+bytes_and_digests: required
+operator_transport: COPY_RETURNED_BYTES_UNCHANGED_TO_DECLARED_PATH
+malformed_output: fail_closed
