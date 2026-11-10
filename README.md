@@ -33,10 +33,10 @@ Public identity: task-transition-runner
 Repository host: github.com
 Repository namespace: GubelUnit
 Repository name: task-transition-runner
-publication_time: UNBOUND
+publication_time: 2026-11-07
 ```
 
-The bound repository target is `github.com/GubelUnit/task-transition-runner`. Publication time remains `UNBOUND`. This package does not export a repository, does not seal a candidate, and does not authorize publication.
+The bound repository target is `github.com/GubelUnit/task-transition-runner`. Publication 2026-11-07.
 
 Package metadata in the pinned `pyproject.toml` names the distribution `task-transition-runner` and the import package `task_transition_runner`, version `0.1.0`.
 
