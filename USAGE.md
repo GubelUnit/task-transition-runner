@@ -105,7 +105,7 @@ Task A of the reference path ends at `DRAINED_AWAITING_TASK`. It is not `SETTLED
 
 These windows are supported. They are not universal recovery.
 
-- Direct GREEN does not require a prior expected-RED task. Expected RED is optional. When it is declared, the bound failure text must match as an exact substring. An unrelated failure does not satisfy it. A later GREEN closes that exact obligation.
+- The supported v0.1.0 reference path is direct GREEN. Direct GREEN does not require a prior expected-RED task. Expected RED is not a supported public CLI lifecycle in this release. The existing integration proof exercises downstream RED admission with a pre-materialized `red_lock`; the public CLI does not currently create that lock. The v0.1.0 failure-signature matcher reads the persisted validation log, including runner-added metadata. It is not evidence of a raw-process-output-only match and must not be treated as an authorization boundary.
 - A second `run` process can resume the same task after a verified result and before the final decisions, without starting the worker again. It does not resume an incomplete Cursor worker.
 - A second `run` process can verify a Git promotion that already exists and finish bookkeeping instead of repeating it.
 - After a settled predecessor, a fresh ordinary task may start under a new `task_id`. That is not historical reopen.
@@ -139,8 +139,7 @@ commands:
 qualifications:
   - mechanical_admission_is_not_universal_semantic_correctness
   - limited_to_the_documented_reference_path_and_contract_proof
-  - expected_red_is_optional
-  - expected_red_matches_an_exact_substring
+  - expected_red_public_cli_lifecycle_not_supported_in_v0_1_0
   - direct_green_does_not_require_a_prior_expected_red
   - worker_success_cannot_authorize_promotion
   - separate_decision_files_do_not_prove_producer_independence
@@ -155,6 +154,7 @@ qualifications:
   - status_on_source_mismatch_is_a_noninterpreting_authority_error
   - reproducibility_is_the_reference_path_plus_the_contract_suite_exit_0
   - reproducibility_is_bound_to_the_exact_release_source_snapshot
+  - real_cursor_a_to_b_witness_is_historical_and_not_rerun_on_current_public_head
   - no_identical_model_outputs
   - no_identical_diffs
   - no_identical_result_shas
@@ -193,7 +193,6 @@ qualifications:
 capabilities:
   - TRANSITION_CONTROL_LAYER
   - DIRECT_GREEN
-  - EXPECTED_RED_CLOSURE
   - WORKER_NONAUTHORITY
   - PRE_AUTHORIZATION_RESTART
   - POST_EFFECT_RECONCILIATION

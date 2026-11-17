@@ -13,7 +13,7 @@ The public command set is exactly `init`, `run`, and `status`. There is no fourt
 
 The evidenced execution adapter is one Cursor headless adapter. The package does not claim provider-agnostic execution.
 
-Reproducibility means the reference path in `REFERENCE_WORKFLOW.md` plus the deterministic contract suite, with exit 0, on the exact release source snapshot. It does not mean identical model outputs, diffs, or result SHAs.
+The supported v0.1.0 reference path is direct GREEN. The real-Cursor A-to-B witness is historical and bound to the pre-export candidate history. It was not rerun against the current public `HEAD`. Current-snapshot reproducibility is limited to the documented direct-GREEN path and the deterministic contract suite when that suite exits 0 on the checked-out snapshot. It does not mean identical model outputs, diffs, or result SHAs.
 
 Read `INSTALL.md`, `USAGE.md`, `REFERENCE_WORKFLOW.md`, `KNOWN_LIMITS.md`, and `PROOF_INDEX.md` before treating any outcome as product proof. The machine-readable projection of those technical pages is `AGENT_GUIDE.yaml`. It does not add commands or authority.
 
@@ -50,8 +50,7 @@ commands:
 qualifications:
   - mechanical_admission_is_not_universal_semantic_correctness
   - limited_to_the_documented_reference_path_and_contract_proof
-  - expected_red_is_optional
-  - expected_red_matches_an_exact_substring
+  - expected_red_public_cli_lifecycle_not_supported_in_v0_1_0
   - direct_green_does_not_require_a_prior_expected_red
   - worker_success_cannot_authorize_promotion
   - separate_decision_files_do_not_prove_producer_independence
@@ -66,6 +65,7 @@ qualifications:
   - status_on_source_mismatch_is_a_noninterpreting_authority_error
   - reproducibility_is_the_reference_path_plus_the_contract_suite_exit_0
   - reproducibility_is_bound_to_the_exact_release_source_snapshot
+  - real_cursor_a_to_b_witness_is_historical_and_not_rerun_on_current_public_head
   - no_identical_model_outputs
   - no_identical_diffs
   - no_identical_result_shas
@@ -104,7 +104,6 @@ qualifications:
 capabilities:
   - TRANSITION_CONTROL_LAYER
   - DIRECT_GREEN
-  - EXPECTED_RED_CLOSURE
   - WORKER_NONAUTHORITY
   - PRE_AUTHORIZATION_RESTART
   - POST_EFFECT_RECONCILIATION

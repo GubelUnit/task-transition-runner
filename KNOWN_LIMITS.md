@@ -136,6 +136,12 @@ Promotion is not a transaction and not an atomic agent workflow.
 
 The Runner admits or blocks durable Git and state transitions. It does not claim transactional rollback of an arbitrary partial workflow.
 
+## EXPECTED_RED_CLOSURE
+
+Expected RED is not a supported public CLI lifecycle in this release.
+
+The supported v0.1.0 reference path is direct GREEN. The existing integration proof exercises downstream RED admission with a pre-materialized `red_lock`; the public CLI does not currently create that lock. The v0.1.0 failure-signature matcher reads the persisted validation log, including runner-added metadata. It is not evidence of a raw-process-output-only match and must not be treated as an authorization boundary.
+
 ## Surface boundaries
 
 The same limits, in operator language:
@@ -146,6 +152,7 @@ The same limits, in operator language:
 - No built-in sandbox. An external sandbox may still be supplied around the process. Validation commands are not sandboxed. `allowed_paths` does not protect the host from same-UID processes or from privileged manipulation.
 - No arbitrary rollback, no recovery from filesystem corruption, and no automatic continuation of a Cursor worker lost mid-stream.
 - No exactly-once execution and no transactional promotion.
+- Expected RED is not a supported public CLI lifecycle in this release (`red_lock` is pre-materialized in the downstream integration proof rather than created by the public CLI, and the v0.1.0 failure-signature matcher reads the persisted validation log including runner-added metadata).
 - No automatic planning, prioritization, or validator trust decision.
 - No historical reopen, no runner self-upgrade, and no runtime-schema migration.
 - No `allowed_write_roots` setting is part of v1.
@@ -155,14 +162,13 @@ The same limits, in operator language:
 - Code authority for the reference path uses a clean Git source checkout.
 
 <!--
-Traceability: [[claim:PUBLIC_REPOSITORY_EXPORT]] [[claim:CANDIDATE_SEAL]] [[claim:LICENSE_NOTICE]] [[claim:FOURTH_CLI_COMMAND]] [[claim:UI_BRIDGE]] [[claim:BUILTIN_PLANNING]] [[claim:PACKAGING_PYPI]] [[claim:PROVIDER_AGNOSTICISM]] [[claim:MODEL_OUTPUT_DETERMINISM]] [[claim:DIFF_DETERMINISM]] [[claim:RESULT_SHA_DETERMINISM]] [[claim:PRODUCER_INDEPENDENCE]] [[claim:HISTORICAL_REOPEN]] [[claim:RUNNER_SELF_UPGRADE]] [[claim:RUNTIME_MIGRATION]] [[claim:PARALLEL_TASKS]] [[claim:DISTRIBUTED_COORDINATION]] [[claim:SANDBOX_SAME_UID_ISOLATION]] [[claim:ARBITRARY_ROLLBACK]] [[claim:UNIVERSAL_RECOVERY]] [[claim:EXACTLY_ONCE]] [[claim:TRANSACTIONAL]] [[claim:WORKER_NONAUTHORITY]] [[claim:CURSOR_ADAPTER]] [[claim:CANDIDATE_COVERAGE_BOUNDARY]] [[claim:CODE_AUTHORITY]]
+Traceability: [[claim:PUBLIC_REPOSITORY_EXPORT]] [[claim:CANDIDATE_SEAL]] [[claim:LICENSE_NOTICE]] [[claim:FOURTH_CLI_COMMAND]] [[claim:UI_BRIDGE]] [[claim:BUILTIN_PLANNING]] [[claim:PACKAGING_PYPI]] [[claim:PROVIDER_AGNOSTICISM]] [[claim:MODEL_OUTPUT_DETERMINISM]] [[claim:DIFF_DETERMINISM]] [[claim:RESULT_SHA_DETERMINISM]] [[claim:PRODUCER_INDEPENDENCE]] [[claim:HISTORICAL_REOPEN]] [[claim:RUNNER_SELF_UPGRADE]] [[claim:RUNTIME_MIGRATION]] [[claim:PARALLEL_TASKS]] [[claim:DISTRIBUTED_COORDINATION]] [[claim:SANDBOX_SAME_UID_ISOLATION]] [[claim:ARBITRARY_ROLLBACK]] [[claim:UNIVERSAL_RECOVERY]] [[claim:EXACTLY_ONCE]] [[claim:TRANSACTIONAL]] [[claim:EXPECTED_RED_CLOSURE]] [[claim:WORKER_NONAUTHORITY]] [[claim:CURSOR_ADAPTER]] [[claim:CANDIDATE_COVERAGE_BOUNDARY]] [[claim:CODE_AUTHORITY]]
 ```oss8-authoritative
 commands: []
 qualifications:
   - mechanical_admission_is_not_universal_semantic_correctness
   - limited_to_the_documented_reference_path_and_contract_proof
-  - expected_red_is_optional
-  - expected_red_matches_an_exact_substring
+  - expected_red_public_cli_lifecycle_not_supported_in_v0_1_0
   - direct_green_does_not_require_a_prior_expected_red
   - worker_success_cannot_authorize_promotion
   - separate_decision_files_do_not_prove_producer_independence
@@ -177,6 +183,7 @@ qualifications:
   - status_on_source_mismatch_is_a_noninterpreting_authority_error
   - reproducibility_is_the_reference_path_plus_the_contract_suite_exit_0
   - reproducibility_is_bound_to_the_exact_release_source_snapshot
+  - real_cursor_a_to_b_witness_is_historical_and_not_rerun_on_current_public_head
   - no_identical_model_outputs
   - no_identical_diffs
   - no_identical_result_shas
@@ -215,7 +222,6 @@ qualifications:
 capabilities:
   - TRANSITION_CONTROL_LAYER
   - DIRECT_GREEN
-  - EXPECTED_RED_CLOSURE
   - WORKER_NONAUTHORITY
   - PRE_AUTHORIZATION_RESTART
   - POST_EFFECT_RECONCILIATION

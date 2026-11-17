@@ -8,9 +8,11 @@ The contract suite entry point is:
 bash scripts/validate.sh --cov="${PWD}/src/task_transition_runner" --cov-branch --cov-fail-under=100
 ```
 
-Run it from the package checkout. `--cov` names the absolute checkout source directory `${PWD}/src/task_transition_runner`. The same invocation requests branch coverage and fails under 100 percent. Default selection excludes tests marked `external_witness`. The live Cursor reference edge carries that marker, so this suite does not execute it.
+Run it from the package checkout. `--cov` names the absolute checkout source directory `${PWD}/src/task_transition_runner`. The same invocation requests branch coverage and fails under 100 percent. Default selection excludes tests marked `external_witness`. The live Cursor reference edge carries that marker, so this suite does not execute it. The real-Cursor A-to-B witness is historical and bound to the pre-export candidate history. It was not rerun against the current public `HEAD`.
 
-Exit 0 of that suite is the contract half of the reproducibility claim for the exact release source snapshot. Local source changes create a different proof subject. It does not claim identical model outputs, diffs, or result SHAs.
+The supported v0.1.0 reference path is direct GREEN. Current-snapshot reproducibility is limited to the documented direct-GREEN path and the deterministic contract suite when that suite exits 0 on the checked-out snapshot. Local source changes create a different proof subject. It does not claim identical model outputs, diffs, or result SHAs.
+
+Among the integration modules below, `tests/integration/test_direct_green.py` exercises the supported direct-GREEN lifecycle. Expected RED is not a supported public CLI lifecycle in this release: `tests/integration/test_expected_red_green.py` exercises downstream RED admission with a pre-materialized `red_lock` (the public CLI does not currently create that lock), and the v0.1.0 failure-signature matcher reads the persisted validation log, including runner-added metadata, rather than raw process output alone.
 
 Private control-plane records are not part of this index.
 
@@ -61,4 +63,4 @@ Private control-plane records are not part of this index.
 - `tests/test_validate_entry.py`
 - `tests/test_worker_result.py`
 
-<!-- Traceability: [[claim:CANDIDATE_COVERAGE_BOUNDARY]] [[claim:REFERENCE_REPRODUCIBILITY]] [[claim:CURSOR_ADAPTER]] [[claim:MODEL_OUTPUT_DETERMINISM]] [[claim:DIFF_DETERMINISM]] [[claim:RESULT_SHA_DETERMINISM]] -->
+<!-- Traceability: [[claim:CANDIDATE_COVERAGE_BOUNDARY]] [[claim:REFERENCE_REPRODUCIBILITY]] [[claim:CURSOR_ADAPTER]] [[claim:DIRECT_GREEN]] [[claim:EXPECTED_RED_CLOSURE]] [[claim:MODEL_OUTPUT_DETERMINISM]] [[claim:DIFF_DETERMINISM]] [[claim:RESULT_SHA_DETERMINISM]] -->
