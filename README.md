@@ -1,5 +1,7 @@
 # task-transition-runner
 
+This project is a public, narrowly scoped result of a larger experiment in AI-native software engineering. Its development was coordinated through specialized AI roles, without a human developer writing or reviewing the implementation line by line. The runner focuses on controlled Git task-state transitions, explicit validation boundaries, and recovery behavior. Its demonstrated capabilities and known limitations are documented below.
+
 `task-transition-runner` is a local control layer for one active task and for durable Git promotion. It admits or blocks a declared task, its evidence, the external decisions, and the Git effect. Mechanical admission is not universal semantic correctness.
 
 Start here:

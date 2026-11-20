@@ -20,7 +20,7 @@ A license or notice is not a supported Runner capability.
 
 License, copyright, attribution and public identity remain open human decisions and are not product features.
 
-The package identity in `README.md` records SPDX `MIT`, the copyright line, and `publication_time: UNBOUND`. `init`, `run`, and `status` do not apply that identity.
+The package identity in `README.md` records SPDX `MIT`, the copyright line, and `publication_time: 2026-11-07`. `init`, `run`, and `status` do not apply that identity.
 
 ## FOURTH_CLI_COMMAND
 
